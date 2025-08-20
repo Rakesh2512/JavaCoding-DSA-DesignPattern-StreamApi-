@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class appearingMoreThanNKTimes {
 
@@ -18,6 +20,27 @@ public class appearingMoreThanNKTimes {
 			}
 		}
 	}
+	
+	public static int secondApproach(int[] arr,int n,int k) {
+		
+		Map<Integer,Integer>mp = new HashMap<>();
+		
+		for(int it: arr) {
+			if(mp.containsKey(it)) {
+				mp.put(it, mp.get(it)+1);
+			}
+			else {
+				mp.put(it,1);
+			}
+		}
+		
+		for(Map.Entry<Integer, Integer> it : mp.entrySet()) {
+			if(it.getValue() > n/k) {
+				return it.getKey();
+			}
+		}
+		return -1;
+	}
 	public static void main(String[] args) {
 		
 		int arr[] = { 1, 2, 2, 6, 6, 6, 6, 7, 10 };
@@ -25,7 +48,9 @@ public class appearingMoreThanNKTimes {
 	    int K = 4;
 	    
 	    
-	    BruteForceApproach(arr,N,K);
+	    //BruteForceApproach(arr,N,K);
+	    
+	    System.out.println(secondApproach(arr,N,K));
 
 	}
 
